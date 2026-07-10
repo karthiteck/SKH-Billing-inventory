@@ -681,7 +681,7 @@ table.data-table tr:hover td {
 /* Inventory Manager Layout */
 .inventory-layout {
   display: grid;
-  grid-template-columns: 350px 1fr;
+  grid-template-columns: 350px minmax(0, 1fr);
   gap: 24px;
   align-items: start;
 }
@@ -695,7 +695,7 @@ table.data-table tr:hover td {
 /* Settings User Layout */
 .settings-users-layout {
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: 320px minmax(0, 1fr);
   gap: 24px;
   align-items: start;
 }
