@@ -3196,7 +3196,7 @@ export default function App() {
             Invoice
           </div>
 
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', marginBottom: '10px', marginTop: '8px' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px', marginBottom: '10px', marginTop: '8px' }}>
             <tbody>
               <tr>
                 <td style={{ width: '12%', fontWeight: 'bold', border: '1px solid black', padding: '4px 6px', color: 'black' }}>Name:</td>

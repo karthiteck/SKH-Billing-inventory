@@ -540,16 +540,16 @@ button, input, select, textarea {
 
 table.data-table {
   width: 100%;
-  min-width: 700px;
+  min-width: 600px;
   border-collapse: collapse;
   text-align: left;
 }
 
 table.data-table th {
   background-color: var(--bg-app);
-  padding: 14px 18px;
+  padding: 10px 12px;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -557,9 +557,9 @@ table.data-table th {
 }
 
 table.data-table td {
-  padding: 14px 18px;
+  padding: 10px 12px;
   border-bottom: 1px solid var(--border-color);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--text-main);
 }
 
@@ -681,8 +681,8 @@ table.data-table tr:hover td {
 /* Inventory Manager Layout */
 .inventory-layout {
   display: grid;
-  grid-template-columns: 350px minmax(0, 1fr);
-  gap: 24px;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 16px;
   align-items: start;
 }
 
@@ -695,8 +695,8 @@ table.data-table tr:hover td {
 /* Settings User Layout */
 .settings-users-layout {
   display: grid;
-  grid-template-columns: 320px minmax(0, 1fr);
-  gap: 24px;
+  grid-template-columns: 290px minmax(0, 1fr);
+  gap: 16px;
   align-items: start;
 }
 
@@ -1268,8 +1268,8 @@ table.data-table tr:hover td {
 
   .print-table th, .print-table td {
     border: none !important;
-    padding: 6px 4px !important;
-    font-size: 13px !important;
+    padding: 5px 4px !important;
+    font-size: 14px !important;
     color: black !important;
   }
 
