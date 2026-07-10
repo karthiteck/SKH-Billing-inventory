@@ -707,7 +707,7 @@ export default function App() {
     doc.line(xLeft, 47, xRight, 47);
     doc.line(xLeft, 53, xRight, 53);
     doc.line(85, 41, 85, 59);
-    doc.line(xLeft + 12, 41, xLeft + 12, 59); // Label separator (left)
+    doc.line(xLeft + 14, 41, xLeft + 14, 59); // Label separator (left)
     doc.line(97, 41, 97, 59); // Label separator (right)
 
     // Customer Data
@@ -715,18 +715,18 @@ export default function App() {
     doc.setFontSize(8);
     doc.text('Name:', xLeft + 2, 45);
     doc.setFont('helvetica', 'normal');
-    doc.text(inv.customerName === 'Walk-in Customer' ? '' : inv.customerName, xLeft + 14, 45);
+    doc.text(inv.customerName === 'Walk-in Customer' ? '' : inv.customerName, xLeft + 16, 45);
 
     doc.setFont('helvetica', 'bold');
     doc.text('Address:', xLeft + 2, 51);
     doc.setFont('helvetica', 'normal');
     const displayPhone = inv.customerPhone === 'N/A' ? '' : inv.customerPhone;
-    doc.text(displayPhone, xLeft + 14, 51);
+    doc.text(displayPhone, xLeft + 16, 51);
 
     doc.setFont('helvetica', 'bold');
     doc.text('GSTIN:', xLeft + 2, 57);
     doc.setFont('helvetica', 'normal');
-    doc.text(inv.customerGst, xLeft + 14, 57);
+    doc.text(inv.customerGst, xLeft + 16, 57);
 
     // Voucher Info
     doc.setFont('helvetica', 'bold');
