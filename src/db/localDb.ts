@@ -462,7 +462,7 @@ export const deleteUser = (id: string): User[] => {
 
 // --- SESSION / AUTH SERVICE ---
 export const getCurrentUser = (): User | null => {
-  const session = localStorage.getItem(KEYS.SESSION);
+  const session = sessionStorage.getItem(KEYS.SESSION);
   return session ? JSON.parse(session) : null;
 };
 
@@ -477,12 +477,12 @@ export const login = (username: string, password: string): User => {
   // Store session (exclude password for security)
   const sessionUser = { ...user };
   delete sessionUser.password;
-  localStorage.setItem(KEYS.SESSION, JSON.stringify(sessionUser));
+  sessionStorage.setItem(KEYS.SESSION, JSON.stringify(sessionUser));
   return sessionUser;
 };
 
 export const logout = (): void => {
-  localStorage.removeItem(KEYS.SESSION);
+  sessionStorage.removeItem(KEYS.SESSION);
 };
 
 // --- SHOP SETTINGS SERVICE ---
