@@ -3300,7 +3300,7 @@ export default function App() {
                     <tr>
                       <td style={{ textAlign: 'center' }}>{idx + 1}</td>
                       <td style={{ textAlign: 'left' }}>
-                        <div style={{ fontWeight: 'bold' }}>{item.name}</div>
+                        <div>{item.name}</div>
                         {item.tintCode !== 'N/A' && (
                           <div style={{ fontSize: '8px', fontStyle: 'italic', marginTop: '2px', color: '#4b5563' }}>
                             * Colour Code: {item.tintCode} | Tint Fee: {shopSettings.currency}{item.tintFee.toFixed(2)}
