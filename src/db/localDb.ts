@@ -561,6 +561,7 @@ export const pullCentralDb = async (): Promise<boolean> => {
       if (data && typeof data === 'object' && Object.keys(data).length > 0) {
         let updated = false;
         Object.entries(data).forEach(([key, val]) => {
+          if (key === KEYS.SESSION) return; // Do not sync user sessions to the server!
           if (typeof val === 'string') {
             const current = localStorage.getItem(key);
             if (current !== val) {
@@ -585,6 +586,7 @@ export const pushCentralDb = async (): Promise<boolean> => {
   try {
     const payload: Record<string, string> = {};
     Object.values(KEYS).forEach((key) => {
+      if (key === KEYS.SESSION) return; // Do not sync user sessions to the server!
       const val = localStorage.getItem(key);
       if (val) {
         payload[key] = val;
