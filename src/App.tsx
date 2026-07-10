@@ -1823,7 +1823,8 @@ export default function App() {
                     className="input-field"
                     placeholder="GSTIN (Optional)"
                     value={customerGst}
-                    onChange={(e) => setCustomerGst(e.target.value)}
+                    onChange={(e) => setCustomerGst(e.target.value.toUpperCase())}
+                    style={{ textTransform: 'uppercase' }}
                   />
                 </div>
 
@@ -2308,14 +2309,18 @@ export default function App() {
                                   <button
                                     className="btn btn-secondary btn-sm"
                                     onClick={() => handleEditProduct(prod)}
+                                    style={{ padding: '6px' }}
+                                    title="Edit Product"
                                   >
-                                    <Edit2 size={12} /> Edit
+                                    <Edit2 size={14} />
                                   </button>
                                   <button
                                     className="btn btn-danger btn-sm"
                                     onClick={() => handleDeleteProduct(prod.id)}
+                                    style={{ padding: '6px' }}
+                                    title="Delete Product"
                                   >
-                                    <Trash2 size={12} /> Delete
+                                    <Trash2 size={14} />
                                   </button>
                                 </div>
                               </td>
@@ -2608,7 +2613,8 @@ export default function App() {
                         type="text"
                         className="input-field"
                         value={shopSettings.gstin}
-                        onChange={(e) => setShopSettings({ ...shopSettings, gstin: e.target.value })}
+                        onChange={(e) => setShopSettings({ ...shopSettings, gstin: e.target.value.toUpperCase() })}
+                        style={{ textTransform: 'uppercase' }}
                         required
                       />
                     </div>
