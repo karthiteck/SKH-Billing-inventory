@@ -1297,7 +1297,7 @@ table.data-table tr:hover td {
 
   .print-totals-box {
     width: 48%;
-    font-size: 16px;
+    font-size: 14px !important;
   }
 
   .print-totals-table {
@@ -1315,7 +1315,7 @@ table.data-table tr:hover td {
     border-top: 1.5px solid black;
     border-bottom: 1.5px double black;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px !important;
   }
 
   .print-signatures {
@@ -1329,7 +1329,7 @@ table.data-table tr:hover td {
     text-align: center;
     border-top: 1px solid black;
     padding-top: 4px;
-    font-size: 13px;
+    font-size: 14px !important;
     color: black !important;
   }
 

@@ -3173,13 +3173,13 @@ export default function App() {
               {shopSettings.shopName}
             </h2>
             {/* Row 2: Store Address */}
-            <p style={{ margin: '1px 0', fontSize: '13px', color: 'black' }}>
+            <p style={{ margin: '1px 0', fontSize: '14px', color: 'black' }}>
               {invoiceToPrint.branch === 'Bettadapura'
                 ? (shopSettings.addressBettadapura || shopSettings.address)
                 : shopSettings.address}
             </p>
             {/* Row 3: Mobile and Email with logos */}
-            <p style={{ margin: '1px 0', fontSize: '13px', color: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
+            <p style={{ margin: '1px 0', fontSize: '14px', color: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                 <Phone size={12} style={{ color: 'black' }} />
                 <span>{shopSettings.phone}</span>
@@ -3190,12 +3190,12 @@ export default function App() {
               </span>
             </p>
             {/* Row 4: GST number */}
-            <div style={{ fontWeight: 700, fontSize: '13px', margin: '1px 0', color: 'black' }}>
+            <div style={{ fontWeight: 700, fontSize: '14px', margin: '1px 0', color: 'black' }}>
               GSTIN: {shopSettings.gstin}
             </div>
           </div>
 
-          <div style={{ backgroundColor: '#e2e8f0', border: '1px solid black', marginTop: '10px', padding: '5px', textAlign: 'center', fontWeight: 'bold', fontSize: '13px', textTransform: 'uppercase', color: 'black', letterSpacing: '1px' }}>
+          <div style={{ backgroundColor: '#e2e8f0', border: '1px solid black', marginTop: '10px', padding: '5px', textAlign: 'center', fontWeight: 'bold', fontSize: '14px', textTransform: 'uppercase', color: 'black', letterSpacing: '1px' }}>
             Invoice
           </div>
 
@@ -3272,7 +3272,7 @@ export default function App() {
           <div className="print-summary-section">
             <div className="print-payment-box">
               <strong>Terms & Conditions:</strong>
-              <div style={{ fontSize: '8px', color: '#4b5563', marginTop: '4px', lineHeight: '1.4' }}>
+              <div style={{ fontSize: '9.5px', color: '#4b5563', marginTop: '4px', lineHeight: '1.4' }}>
                 1. Goods once sold cannot be taken back or exchanged.
                 <br />
                 2. Subject to local jurisdiction.
@@ -3285,25 +3285,25 @@ export default function App() {
               <table className="print-totals-table">
                 <tbody>
                   <tr>
-                    <td style={{ color: '#4b5563' }}>Subtotal:</td>
+                    <td style={{ color: '#4b5563' }}>Subtotal</td>
                     <td style={{ textAlign: 'right', fontWeight: 600 }}>{shopSettings.currency}{invoiceToPrint.subtotal.toFixed(2)}</td>
                   </tr>
                   {invoiceToPrint.discount > 0 && (
                     <tr>
-                      <td style={{ color: 'red' }}>Discount (-):</td>
+                      <td style={{ color: 'red' }}>Discount (-)</td>
                       <td style={{ textAlign: 'right', color: 'red' }}>-{shopSettings.currency}{invoiceToPrint.discount.toFixed(2)}</td>
                     </tr>
                   )}
                   <tr>
-                    <td style={{ color: '#4b5563' }}>Taxable Value:</td>
+                    <td style={{ color: '#4b5563' }}>Taxable Value</td>
                     <td style={{ textAlign: 'right' }}>{shopSettings.currency}{(invoiceToPrint.subtotal - invoiceToPrint.discount).toFixed(2)}</td>
                   </tr>
                   <tr>
-                    <td style={{ color: '#4b5563' }}>CGST/SGST Tax ({invoiceToPrint.taxRate}%):</td>
+                    <td style={{ color: '#4b5563' }}>CGST/SGST Tax ({invoiceToPrint.taxRate}%)</td>
                     <td style={{ textAlign: 'right' }}>{shopSettings.currency}{invoiceToPrint.taxAmount.toFixed(2)}</td>
                   </tr>
                   <tr className="grand-total">
-                    <td style={{ textTransform: 'uppercase' }}>Grand Total:</td>
+                    <td style={{ textTransform: 'uppercase' }}>Grand Total</td>
                     <td style={{ textAlign: 'right' }}>{shopSettings.currency}{invoiceToPrint.grandTotal.toFixed(2)}</td>
                   </tr>
                 </tbody>
