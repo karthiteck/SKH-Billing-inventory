@@ -3222,13 +3222,13 @@ export default function App() {
               {shopSettings.shopName}
             </h2>
             {/* Row 2: Store Address */}
-            <p style={{ margin: '1px 0', fontSize: '14px', color: 'black' }}>
+            <p style={{ margin: '1px 0', fontSize: '12px', color: 'black' }}>
               {invoiceToPrint.branch === 'Bettadapura'
                 ? (shopSettings.addressBettadapura || shopSettings.address)
                 : shopSettings.address}
             </p>
             {/* Row 3: Mobile and Email with logos */}
-            <p style={{ margin: '1px 0', fontSize: '14px', color: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
+            <p style={{ margin: '1px 0', fontSize: '12px', color: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                 <Phone size={12} style={{ color: 'black' }} />
                 <span>{shopSettings.phone}</span>
@@ -3239,16 +3239,16 @@ export default function App() {
               </span>
             </p>
             {/* Row 4: GST number */}
-            <div style={{ fontWeight: 700, fontSize: '14px', margin: '1px 0', color: 'black' }}>
+            <div style={{ fontWeight: 700, fontSize: '12px', margin: '1px 0', color: 'black' }}>
               GSTIN: {shopSettings.gstin}
             </div>
           </div>
 
-          <div style={{ backgroundColor: '#e2e8f0', border: '1px solid black', marginTop: '4px', padding: '2px 4px', textAlign: 'center', fontWeight: 'bold', fontSize: '14px', textTransform: 'uppercase', color: 'black', letterSpacing: '1px' }}>
+          <div style={{ backgroundColor: '#e2e8f0', border: '1px solid black', marginTop: '4px', padding: '2px 4px', textAlign: 'center', fontWeight: 'bold', fontSize: '12px', textTransform: 'uppercase', color: 'black', letterSpacing: '1px' }}>
             Invoice
           </div>
 
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px', marginBottom: '4px', marginTop: '4px' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', marginBottom: '4px', marginTop: '4px' }}>
             <tbody>
               <tr>
                 <td style={{ width: '9%', fontWeight: 'bold', border: '1px solid black', padding: '2px 4px', color: 'black' }}>Name:</td>

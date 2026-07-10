@@ -1202,7 +1202,7 @@ table.data-table tr:hover td {
     margin: 0;
     padding: 0px 4px !important;
     font-family: system-ui, -apple-system, sans-serif;
-    font-size: 14px !important;
+    font-size: 12px !important;
     color: black !important;
     background-color: white !important;
     page-break-inside: avoid !important;
@@ -1264,7 +1264,7 @@ table.data-table tr:hover td {
   .print-table th, .print-table td {
     border: none !important;
     padding: 2px 4px !important;
-    font-size: 14px !important;
+    font-size: 12px !important;
     line-height: 1.15 !important;
     color: black !important;
   }
@@ -1299,7 +1299,7 @@ table.data-table tr:hover td {
 
   .print-totals-box {
     width: 48%;
-    font-size: 14px !important;
+    font-size: 12px !important;
   }
 
   .print-totals-table {
@@ -1311,14 +1311,14 @@ table.data-table tr:hover td {
     padding: 2px 4px !important;
     border: none;
     color: black !important;
-    font-size: 14px !important;
+    font-size: 12px !important;
   }
 
   .print-totals-table tr.grand-total td {
     border-top: 1.5px solid black;
     border-bottom: 1.5px double black;
     font-weight: bold;
-    font-size: 14px !important;
+    font-size: 12px !important;
   }
 
   .print-signatures {
@@ -1332,7 +1332,7 @@ table.data-table tr:hover td {
     text-align: center;
     border-top: 1px solid black;
     padding-top: 2px !important;
-    font-size: 14px !important;
+    font-size: 12px !important;
     color: black !important;
   }
 
