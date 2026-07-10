@@ -2469,9 +2469,9 @@ export default function App() {
                                 className="btn btn-secondary btn-sm"
                                 onClick={() => setViewingInvoice(inv)}
                                 title="View Invoice Details"
-                                style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                                style={{ padding: '6px' }}
                               >
-                                <Eye size={12} /> View
+                                <Eye size={14} />
                               </button>
                               <button
                                 className="btn btn-secondary btn-sm"
@@ -2479,17 +2479,18 @@ export default function App() {
                                   setInvoiceToPrint(inv);
                                   setTimeout(() => window.print(), 300);
                                 }}
-                                style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                                title="Reprint Invoice"
+                                style={{ padding: '6px' }}
                               >
-                                <Printer size={12} /> Reprint
+                                <Printer size={14} />
                               </button>
                               <button
                                 className="btn btn-danger btn-sm"
                                 onClick={() => handleDeleteInvoice(inv.id)}
                                 title="Delete Invoice & Restore Stock"
-                                style={{ padding: '4px 8px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                                style={{ padding: '6px' }}
                               >
-                                <Trash2 size={12} /> Delete
+                                <Trash2 size={14} />
                               </button>
                             </div>
                           </td>

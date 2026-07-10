@@ -437,17 +437,11 @@ button, input, select, textarea {
   gap: 20px;
 }
 
-/* Reports KPI Cards Grid (5 columns on desktop) */
+/* Reports KPI Cards Grid (Auto-wrapping to fit any layout) */
 .reports-kpi-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-}
-
-@media (max-width: 1200px) {
-  .reports-kpi-grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
 }
 
 .kpi-card {
