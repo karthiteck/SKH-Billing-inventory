@@ -809,7 +809,8 @@ export default function App() {
         yPos -= 3.5;
       }
 
-      yPos += item.tintCode !== 'N/A' ? 9.5 : 6;
+      const rowHeight = inv.items.length <= 5 ? 8.5 : (inv.items.length <= 8 ? 7.2 : 6.0);
+      yPos += item.tintCode !== 'N/A' ? (rowHeight + 3.5) : rowHeight;
     });
 
     // Draw horizontal border below the last item row
