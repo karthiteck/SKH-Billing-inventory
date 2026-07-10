@@ -1463,9 +1463,8 @@ export default function App() {
               </div>
 
               <div 
-                className="card kpi-card" 
+                className="card kpi-card kpi-card-clickable" 
                 onClick={() => setCurrentView('reports')}
-                style={{ cursor: 'pointer' }}
               >
                 <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
                   <span className="kpi-label">Today's Bills</span>
@@ -1480,12 +1479,11 @@ export default function App() {
               </div>
 
               <div 
-                className="card kpi-card" 
+                className="card kpi-card kpi-card-clickable" 
                 onClick={() => {
                   setCurrentView('inventory');
                   setCatalogLowStockFilter(true);
                 }}
-                style={{ cursor: 'pointer' }}
               >
                 <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
                   <span className="kpi-label">Low Stock items</span>
