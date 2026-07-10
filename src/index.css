@@ -1200,13 +1200,14 @@ table.data-table tr:hover td {
     top: 0;
     width: 100%;
     margin: 0;
-    padding: 6px;
+    padding: 0px 4px !important;
     font-family: system-ui, -apple-system, sans-serif;
-    font-size: 11px;
+    font-size: 14px !important;
     color: black !important;
     background-color: white !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
+    min-height: auto !important;
   }
 
   .print-header {
@@ -1262,8 +1263,9 @@ table.data-table tr:hover td {
 
   .print-table th, .print-table td {
     border: none !important;
-    padding: 5px 4px !important;
+    padding: 2px 4px !important;
     font-size: 14px !important;
+    line-height: 1.15 !important;
     color: black !important;
   }
 
@@ -1284,12 +1286,12 @@ table.data-table tr:hover td {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 8px;
+    margin-top: 4px !important;
   }
 
   .print-payment-box {
     border: 1px solid black;
-    padding: 8px;
+    padding: 4px 6px !important;
     border-radius: 4px;
     width: 48%;
     font-size: 10px;
@@ -1306,9 +1308,10 @@ table.data-table tr:hover td {
   }
 
   .print-totals-table td {
-    padding: 4px;
+    padding: 2px 4px !important;
     border: none;
     color: black !important;
+    font-size: 14px !important;
   }
 
   .print-totals-table tr.grand-total td {
@@ -1321,14 +1324,14 @@ table.data-table tr:hover td {
   .print-signatures {
     display: flex;
     justify-content: space-between;
-    margin-top: 24px;
+    margin-top: 10px !important;
   }
 
   .print-sig-box {
     width: 240px;
     text-align: center;
     border-top: 1px solid black;
-    padding-top: 4px;
+    padding-top: 2px !important;
     font-size: 14px !important;
     color: black !important;
   }

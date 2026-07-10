@@ -703,44 +703,44 @@ export default function App() {
     printCentered('INVOICE', 36, 10, true);
 
     // Customer Metadata Table
-    doc.rect(xLeft, 47, xWidth, 18);
+    doc.rect(xLeft, 41, xWidth, 18);
+    doc.line(xLeft, 47, xRight, 47);
     doc.line(xLeft, 53, xRight, 53);
-    doc.line(xLeft, 59, xRight, 59);
-    doc.line(85, 47, 85, 65);
+    doc.line(85, 41, 85, 59);
 
     // Customer Data
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(8);
-    doc.text('Name:', xLeft + 2, 51);
+    doc.text('Name:', xLeft + 2, 45);
     doc.setFont('helvetica', 'normal');
-    doc.text(inv.customerName === 'Walk-in Customer' ? '' : inv.customerName, xLeft + 18, 51);
+    doc.text(inv.customerName === 'Walk-in Customer' ? '' : inv.customerName, xLeft + 18, 45);
 
     doc.setFont('helvetica', 'bold');
-    doc.text('Address:', xLeft + 2, 57);
+    doc.text('Address:', xLeft + 2, 51);
     doc.setFont('helvetica', 'normal');
     const displayPhone = inv.customerPhone === 'N/A' ? '' : inv.customerPhone;
-    doc.text(displayPhone, xLeft + 18, 57);
+    doc.text(displayPhone, xLeft + 18, 51);
 
     doc.setFont('helvetica', 'bold');
-    doc.text('GSTIN:', xLeft + 2, 63);
+    doc.text('GSTIN:', xLeft + 2, 57);
     doc.setFont('helvetica', 'normal');
-    doc.text(inv.customerGst, xLeft + 18, 63);
+    doc.text(inv.customerGst, xLeft + 18, 57);
 
     // Voucher Info
     doc.setFont('helvetica', 'bold');
-    doc.text('Date:', 87, 51);
+    doc.text('Date:', 87, 45);
     doc.setFont('helvetica', 'normal');
-    doc.text(new Date(inv.date).toLocaleDateString(), 105, 51);
+    doc.text(new Date(inv.date).toLocaleDateString(), 105, 45);
 
     doc.setFont('helvetica', 'bold');
-    doc.text('Invoice No:', 87, 57);
+    doc.text('Invoice No:', 87, 51);
     doc.setFont('helvetica', 'normal');
-    doc.text(inv.invoiceNumber, 105, 57);
+    doc.text(inv.invoiceNumber, 105, 51);
 
     doc.setFont('helvetica', 'bold');
-    doc.text('State:', 87, 63);
+    doc.text('State:', 87, 57);
     doc.setFont('helvetica', 'normal');
-    doc.text('KAR (Code: 29)', 105, 63);
+    doc.text('KAR (Code: 29)', 105, 57);
 
     // Items Table Headers
     const colWidths = {
@@ -761,19 +761,19 @@ export default function App() {
       amount: xLeft + colWidths.sl + colWidths.desc + colWidths.hsn + colWidths.qty + colWidths.price
     };
 
+    doc.line(xLeft, 63, xRight, 63);
     doc.line(xLeft, 69, xRight, 69);
-    doc.line(xLeft, 75, xRight, 75);
 
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(7.5);
-    doc.text('Sl No', colX.sl + colWidths.sl / 2, 73, { align: 'center' });
-    doc.text('Item Description', colX.desc + 1, 73);
-    doc.text('HSN', colX.hsn + colWidths.hsn / 2, 73, { align: 'center' });
-    doc.text('Qty', colX.qty + colWidths.qty / 2, 73, { align: 'center' });
-    doc.text('Price', colX.price + colWidths.price - 1, 73, { align: 'right' });
-    doc.text('Amount', colX.amount + colWidths.amount - 1, 73, { align: 'right' });
+    doc.text('Sl No', colX.sl + colWidths.sl / 2, 67, { align: 'center' });
+    doc.text('Item Description', colX.desc + 1, 67);
+    doc.text('HSN', colX.hsn + colWidths.hsn / 2, 67, { align: 'center' });
+    doc.text('Qty', colX.qty + colWidths.qty / 2, 67, { align: 'center' });
+    doc.text('Price', colX.price + colWidths.price - 1, 67, { align: 'right' });
+    doc.text('Amount', colX.amount + colWidths.amount - 1, 67, { align: 'right' });
 
-    let yPos = 79;
+    let yPos = 73;
     inv.items.forEach((item, idx) => {
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(7.5);
@@ -3200,7 +3200,7 @@ export default function App() {
       {/* --- RECEIPT TEMPLATE - ONLY VISIBLE ON PRINT ACTION --- */}
       {invoiceToPrint && (
         <div className="print-area print-only">
-          <div className="print-header" style={{ border: '1px solid black', padding: '6px 10px', textAlign: 'center', backgroundColor: '#f1f5f9', lineHeight: '1.2' }}>
+          <div className="print-header" style={{ border: '1px solid black', padding: '3px 8px', textAlign: 'center', backgroundColor: '#f1f5f9', lineHeight: '1.2' }}>
             {/* Row 1: Shop Name in one line */}
             <h2 style={{ fontSize: '16px', fontWeight: 900, margin: '0 0 2px 0', textTransform: 'uppercase', color: 'black', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
               {shopSettings.shopName}
@@ -3228,29 +3228,29 @@ export default function App() {
             </div>
           </div>
 
-          <div style={{ backgroundColor: '#e2e8f0', border: '1px solid black', marginTop: '10px', padding: '5px', textAlign: 'center', fontWeight: 'bold', fontSize: '14px', textTransform: 'uppercase', color: 'black', letterSpacing: '1px' }}>
+          <div style={{ backgroundColor: '#e2e8f0', border: '1px solid black', marginTop: '4px', padding: '2px 4px', textAlign: 'center', fontWeight: 'bold', fontSize: '14px', textTransform: 'uppercase', color: 'black', letterSpacing: '1px' }}>
             Invoice
           </div>
 
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px', marginBottom: '10px', marginTop: '8px' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px', marginBottom: '4px', marginTop: '4px' }}>
             <tbody>
               <tr>
-                <td style={{ width: '12%', fontWeight: 'bold', border: '1px solid black', padding: '4px 6px', color: 'black' }}>Name:</td>
-                <td style={{ width: '48%', border: '1px solid black', padding: '4px 6px', color: 'black' }}>{invoiceToPrint.customerName === 'Walk-in Customer' ? '' : invoiceToPrint.customerName}</td>
-                <td style={{ width: '15%', fontWeight: 'bold', border: '1px solid black', padding: '4px 6px', color: 'black' }}>Date:</td>
-                <td style={{ width: '25%', border: '1px solid black', padding: '4px 6px', color: 'black' }}>{new Date(invoiceToPrint.date).toLocaleDateString()}</td>
+                <td style={{ width: '12%', fontWeight: 'bold', border: '1px solid black', padding: '2px 4px', color: 'black' }}>Name:</td>
+                <td style={{ width: '48%', border: '1px solid black', padding: '2px 4px', color: 'black' }}>{invoiceToPrint.customerName === 'Walk-in Customer' ? '' : invoiceToPrint.customerName}</td>
+                <td style={{ width: '15%', fontWeight: 'bold', border: '1px solid black', padding: '2px 4px', color: 'black' }}>Date:</td>
+                <td style={{ width: '25%', border: '1px solid black', padding: '2px 4px', color: 'black' }}>{new Date(invoiceToPrint.date).toLocaleDateString()}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '4px 6px', color: 'black' }}>Address:</td>
-                <td style={{ border: '1px solid black', padding: '4px 6px', color: 'black' }}>{invoiceToPrint.customerPhone === 'N/A' ? '' : invoiceToPrint.customerPhone}</td>
-                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '4px 6px', color: 'black' }}>Invoice No:</td>
-                <td style={{ border: '1px solid black', padding: '4px 6px', fontWeight: 'bold', color: 'black' }}>{invoiceToPrint.invoiceNumber}</td>
+                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '2px 4px', color: 'black' }}>Address:</td>
+                <td style={{ border: '1px solid black', padding: '2px 4px', color: 'black' }}>{invoiceToPrint.customerPhone === 'N/A' ? '' : invoiceToPrint.customerPhone}</td>
+                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '2px 4px', color: 'black' }}>Invoice No:</td>
+                <td style={{ border: '1px solid black', padding: '2px 4px', fontWeight: 'bold', color: 'black' }}>{invoiceToPrint.invoiceNumber}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '4px 6px', color: 'black' }}>GSTIN:</td>
-                <td style={{ border: '1px solid black', padding: '4px 6px', color: 'black' }}>{invoiceToPrint.customerGst === 'N/A' ? '' : invoiceToPrint.customerGst}</td>
-                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '4px 6px', color: 'black' }}>State: KAR</td>
-                <td style={{ border: '1px solid black', padding: '4px 6px', color: 'black' }}>Code: 29</td>
+                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '2px 4px', color: 'black' }}>GSTIN:</td>
+                <td style={{ border: '1px solid black', padding: '2px 4px', color: 'black' }}>{invoiceToPrint.customerGst === 'N/A' ? '' : invoiceToPrint.customerGst}</td>
+                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '2px 4px', color: 'black' }}>State: KAR</td>
+                <td style={{ border: '1px solid black', padding: '2px 4px', color: 'black' }}>Code: 29</td>
               </tr>
             </tbody>
           </table>
