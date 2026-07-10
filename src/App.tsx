@@ -742,13 +742,22 @@ export default function App() {
     doc.text('KAR (Code: 29)', 105, 63);
 
     // Items Table Headers
+    const colWidths = {
+      sl: 10,
+      desc: 62,
+      hsn: 12,
+      qty: 12,
+      price: 17,
+      amount: 19
+    };
+
     const colX = {
       sl: xLeft,
-      desc: xLeft + 8,
-      hsn: xLeft + 8 + 65,
-      qty: xLeft + 8 + 65 + 12,
-      price: xLeft + 8 + 65 + 12 + 10,
-      amount: xLeft + 8 + 65 + 12 + 10 + 17
+      desc: xLeft + colWidths.sl,
+      hsn: xLeft + colWidths.sl + colWidths.desc,
+      qty: xLeft + colWidths.sl + colWidths.desc + colWidths.hsn,
+      price: xLeft + colWidths.sl + colWidths.desc + colWidths.hsn + colWidths.qty,
+      amount: xLeft + colWidths.sl + colWidths.desc + colWidths.hsn + colWidths.qty + colWidths.price
     };
 
     doc.line(xLeft, 69, xRight, 69);
@@ -756,20 +765,20 @@ export default function App() {
 
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(7.5);
-    doc.text('Sl No', colX.sl + 1, 73);
-    doc.text('Item Description', colX.desc + 2, 73);
-    doc.text('HSN', colX.hsn + 2, 73);
-    doc.text('Qty', colX.qty + 2, 73);
-    doc.text('Price', colX.price + 2, 73);
-    doc.text('Amount', colX.amount + 2, 73);
+    doc.text('Sl No', colX.sl + colWidths.sl / 2, 73, { align: 'center' });
+    doc.text('Item Description', colX.desc + 1, 73);
+    doc.text('HSN', colX.hsn + colWidths.hsn / 2, 73, { align: 'center' });
+    doc.text('Qty', colX.qty + colWidths.qty / 2, 73, { align: 'center' });
+    doc.text('Price', colX.price + colWidths.price - 1, 73, { align: 'right' });
+    doc.text('Amount', colX.amount + colWidths.amount - 1, 73, { align: 'right' });
 
     let yPos = 79;
     inv.items.forEach((item, idx) => {
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(7.5);
       
-      doc.text(String(idx + 1), colX.sl + 2, yPos);
-      doc.text(item.name, colX.desc + 2, yPos);
+      doc.text(String(idx + 1), colX.sl + colWidths.sl / 2, yPos, { align: 'center' });
+      doc.text(item.name, colX.desc + 1, yPos);
       
       const isPaintCategory = 
         item.category === 'Interior Paints' || 
@@ -783,51 +792,91 @@ export default function App() {
         item.name.toLowerCase().includes('apex') ||
         item.name.toLowerCase().includes('easy clean');
       const hsnText = isPaintCategory ? '3209' : '---';
-      doc.text(hsnText, colX.hsn + 2, yPos);
+      doc.text(hsnText, colX.hsn + colWidths.hsn / 2, yPos, { align: 'center' });
       
-      doc.text(String(item.quantity), colX.qty + 2, yPos);
-      doc.text(item.price.toFixed(2), colX.price + 2, yPos);
-      doc.text(item.subtotal.toFixed(2), colX.amount + 2, yPos);
+      doc.text(String(item.quantity), colX.qty + colWidths.qty / 2, yPos, { align: 'center' });
+      doc.text(item.price.toFixed(2), colX.price + colWidths.price - 1, yPos, { align: 'right' });
+      doc.text(item.subtotal.toFixed(2), colX.amount + colWidths.amount - 1, yPos, { align: 'right' });
 
       if (item.tintCode !== 'N/A') {
         yPos += 3.5;
         doc.setFont('helvetica', 'italic');
         doc.setFontSize(6.5);
-        doc.text(`* Colour Code: ${item.tintCode} | Tint Fee: Rs. ${item.tintFee.toFixed(2)}`, colX.desc + 2, yPos);
+        doc.text(`* Colour Code: ${item.tintCode} | Tint Fee: Rs. ${item.tintFee.toFixed(2)}`, colX.desc + 1, yPos);
         yPos -= 3.5;
       }
 
       yPos += item.tintCode !== 'N/A' ? 9.5 : 6;
     });
 
+    // Draw grid borders around and inside table
     doc.line(xLeft, yPos - 1, xRight, yPos - 1);
+    
+    // Draw vertical lines
+    doc.line(xLeft, 69, xLeft, yPos - 1);
+    doc.line(colX.desc, 69, colX.desc, yPos - 1);
+    doc.line(colX.hsn, 69, colX.hsn, yPos - 1);
+    doc.line(colX.qty, 69, colX.qty, yPos - 1);
+    doc.line(colX.price, 69, colX.price, yPos - 1);
+    doc.line(colX.amount, 69, colX.amount, yPos - 1);
+    doc.line(xRight, 69, xRight, yPos - 1);
 
-    let yTotal = yPos + 4;
+    let yTotalSection = yPos + 4;
+    // Check if total section & signatures fit on page, otherwise add a new page
+    if (yTotalSection + 42 > 200) {
+      doc.addPage();
+      yTotalSection = 15;
+    }
+
+    // Terms and Conditions on the left
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7.5);
+    doc.text('Terms & Conditions:', xLeft + 2, yTotalSection + 1);
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
+    doc.setFontSize(6.5);
+    doc.text('1. Goods once sold cannot be taken back or exchanged.', xLeft + 2, yTotalSection + 5);
+    doc.text('2. Subject to local jurisdiction.', xLeft + 2, yTotalSection + 8);
+    doc.text('3. Total amount is inclusive of applicable GST rates.', xLeft + 2, yTotalSection + 11);
+    
+    // Draw border rectangle around Terms
+    doc.rect(xLeft, yTotalSection - 2, 62, 16);
 
+    // Totals section on the right
+    let yTotal = yTotalSection + 1;
     const drawTotalRow = (label: string, value: string, isBold = false) => {
       doc.setFont('helvetica', isBold ? 'bold' : 'normal');
+      doc.setFontSize(7.5);
       doc.text(label, xRight - 55, yTotal);
       doc.text(value, xRight - 2, yTotal, { align: 'right' });
-      yTotal += 5;
+      yTotal += 4.5;
     };
 
     drawTotalRow('Subtotal:', `Rs. ${inv.subtotal.toFixed(2)}`);
     if (inv.discount > 0) {
-      drawTotalRow('Discount Waved:', `-Rs. ${inv.discount.toFixed(2)}`);
+      drawTotalRow('Discount:', `-Rs. ${inv.discount.toFixed(2)}`);
     }
-    drawTotalRow(`GST/Tax (${settings.defaultTaxRate}%):`, `Rs. ${inv.taxAmount.toFixed(2)}`);
+    drawTotalRow('Taxable Value:', `Rs. ${(inv.subtotal - inv.discount).toFixed(2)}`);
+    drawTotalRow(`CGST/SGST Tax (${inv.taxRate}%):`, `Rs. ${inv.taxAmount.toFixed(2)}`);
     
-    // Add extra padding and center the line in the gap
+    doc.line(xRight - 55, yTotal - 2, xRight, yTotal - 2);
     yTotal += 1;
-    doc.line(xRight - 58, yTotal, xRight, yTotal);
-    yTotal += 5;
-    
-    drawTotalRow('Payable Total:', `Rs. ${inv.grandTotal.toFixed(2)}`, true);
-    
-    doc.setFont('helvetica', 'normal');
+    drawTotalRow('Grand Total:', `Rs. ${inv.grandTotal.toFixed(2)}`, true);
     drawTotalRow('Payment Mode:', inv.paymentMethod);
+
+    // Signatures
+    const ySig = Math.max(yTotal, yTotalSection + 16) + 12;
+    // Customer signature line (left)
+    doc.line(xLeft, ySig, xLeft + 45, ySig);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7.5);
+    doc.text('Customer Signature', xLeft + 22.5, ySig + 4, { align: 'center' });
+
+    // Shop signature line (right)
+    doc.line(xRight - 55, ySig, xRight, ySig);
+    doc.text(`For ${settings.shopName}`, xRight - 27.5, ySig - 5, { align: 'center' });
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(6.5);
+    doc.text('(Authorized Signatory)', xRight - 27.5, ySig + 4, { align: 'center' });
 
     return doc.output('blob');
   };
@@ -3156,25 +3205,25 @@ export default function App() {
             Invoice
           </div>
 
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '16px', marginBottom: '12px', marginTop: '10px' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', marginBottom: '10px', marginTop: '8px' }}>
             <tbody>
               <tr>
-                <td style={{ width: '12%', fontWeight: 'bold', border: '1px solid black', padding: '6px', color: 'black' }}>Name:</td>
-                <td style={{ width: '48%', border: '1px solid black', padding: '6px', color: 'black' }}>{invoiceToPrint.customerName === 'Walk-in Customer' ? '' : invoiceToPrint.customerName}</td>
-                <td style={{ width: '15%', fontWeight: 'bold', border: '1px solid black', padding: '6px', color: 'black' }}>Date</td>
-                <td style={{ width: '25%', border: '1px solid black', padding: '6px', color: 'black' }}>{new Date(invoiceToPrint.date).toLocaleDateString()}</td>
+                <td style={{ width: '12%', fontWeight: 'bold', border: '1px solid black', padding: '4px 6px', color: 'black' }}>Name:</td>
+                <td style={{ width: '48%', border: '1px solid black', padding: '4px 6px', color: 'black' }}>{invoiceToPrint.customerName === 'Walk-in Customer' ? '' : invoiceToPrint.customerName}</td>
+                <td style={{ width: '15%', fontWeight: 'bold', border: '1px solid black', padding: '4px 6px', color: 'black' }}>Date:</td>
+                <td style={{ width: '25%', border: '1px solid black', padding: '4px 6px', color: 'black' }}>{new Date(invoiceToPrint.date).toLocaleDateString()}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '6px', color: 'black' }}>Address:</td>
-                <td style={{ border: '1px solid black', padding: '6px', color: 'black' }}>{invoiceToPrint.customerPhone === 'N/A' ? '' : invoiceToPrint.customerPhone}</td>
-                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '6px', color: 'black' }}>Invoice No</td>
-                <td style={{ border: '1px solid black', padding: '6px', fontWeight: 'bold', color: 'black' }}>{invoiceToPrint.invoiceNumber}</td>
+                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '4px 6px', color: 'black' }}>Address:</td>
+                <td style={{ border: '1px solid black', padding: '4px 6px', color: 'black' }}>{invoiceToPrint.customerPhone === 'N/A' ? '' : invoiceToPrint.customerPhone}</td>
+                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '4px 6px', color: 'black' }}>Invoice No:</td>
+                <td style={{ border: '1px solid black', padding: '4px 6px', fontWeight: 'bold', color: 'black' }}>{invoiceToPrint.invoiceNumber}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '6px', color: 'black' }}>GSTIN:</td>
-                <td style={{ border: '1px solid black', padding: '6px', color: 'black' }}>{invoiceToPrint.customerGst === 'N/A' ? '' : invoiceToPrint.customerGst}</td>
-                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '6px', color: 'black' }}>State: KAR</td>
-                <td style={{ border: '1px solid black', padding: '6px', color: 'black' }}>Code: 29</td>
+                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '4px 6px', color: 'black' }}>GSTIN:</td>
+                <td style={{ border: '1px solid black', padding: '4px 6px', color: 'black' }}>{invoiceToPrint.customerGst === 'N/A' ? '' : invoiceToPrint.customerGst}</td>
+                <td style={{ fontWeight: 'bold', border: '1px solid black', padding: '4px 6px', color: 'black' }}>State: KAR</td>
+                <td style={{ border: '1px solid black', padding: '4px 6px', color: 'black' }}>Code: 29</td>
               </tr>
             </tbody>
           </table>
@@ -3182,12 +3231,12 @@ export default function App() {
           <table className="print-table">
             <thead>
               <tr>
-                <th style={{ width: '45px' }}>Sl No</th>
-                <th>Item Description</th>
-                <th style={{ width: '60px' }}>HSN</th>
-                <th style={{ width: '55px' }}>Qty</th>
-                <th style={{ width: '80px', textAlign: 'right' }}>Price</th>
-                <th style={{ width: '90px', textAlign: 'right' }}>Amount</th>
+                <th style={{ width: '45px', textAlign: 'center', border: '1px solid black' }}>Sl No</th>
+                <th style={{ textAlign: 'left', border: '1px solid black' }}>Item Description</th>
+                <th style={{ width: '60px', textAlign: 'center', border: '1px solid black' }}>HSN</th>
+                <th style={{ width: '55px', textAlign: 'center', border: '1px solid black' }}>Qty</th>
+                <th style={{ width: '85px', textAlign: 'right', border: '1px solid black', paddingRight: '6px' }}>Price</th>
+                <th style={{ width: '95px', textAlign: 'right', border: '1px solid black', paddingRight: '6px' }}>Amount</th>
               </tr>
             </thead>
             <tbody>
@@ -3206,8 +3255,8 @@ export default function App() {
                 return (
                   <React.Fragment key={idx}>
                     <tr>
-                      <td>{idx + 1}</td>
-                      <td>
+                      <td style={{ textAlign: 'center', border: '1px solid black' }}>{idx + 1}</td>
+                      <td style={{ textAlign: 'left', border: '1px solid black' }}>
                         <div style={{ fontWeight: 'bold' }}>{item.name}</div>
                         {item.tintCode !== 'N/A' && (
                           <div style={{ fontSize: '8px', fontStyle: 'italic', marginTop: '2px', color: '#4b5563' }}>
@@ -3215,10 +3264,10 @@ export default function App() {
                           </div>
                         )}
                       </td>
-                      <td>{hsn}</td>
-                      <td>{item.quantity}</td>
-                      <td style={{ textAlign: 'right' }}>{item.price.toFixed(2)}</td>
-                      <td style={{ textAlign: 'right' }}>{item.subtotal.toFixed(2)}</td>
+                      <td style={{ textAlign: 'center', border: '1px solid black' }}>{hsn}</td>
+                      <td style={{ textAlign: 'center', border: '1px solid black' }}>{item.quantity}</td>
+                      <td style={{ textAlign: 'right', border: '1px solid black', paddingRight: '6px' }}>{item.price.toFixed(2)}</td>
+                      <td style={{ textAlign: 'right', border: '1px solid black', paddingRight: '6px' }}>{item.subtotal.toFixed(2)}</td>
                     </tr>
                   </React.Fragment>
                 );
@@ -3242,25 +3291,25 @@ export default function App() {
               <table className="print-totals-table">
                 <tbody>
                   <tr>
-                    <td style={{ color: '#4b5563' }}>Subtotal</td>
+                    <td style={{ color: '#4b5563' }}>Subtotal:</td>
                     <td style={{ textAlign: 'right', fontWeight: 600 }}>{shopSettings.currency}{invoiceToPrint.subtotal.toFixed(2)}</td>
                   </tr>
                   {invoiceToPrint.discount > 0 && (
                     <tr>
-                      <td style={{ color: 'red' }}>Discount (-)</td>
+                      <td style={{ color: 'red' }}>Discount (-):</td>
                       <td style={{ textAlign: 'right', color: 'red' }}>-{shopSettings.currency}{invoiceToPrint.discount.toFixed(2)}</td>
                     </tr>
                   )}
                   <tr>
-                    <td style={{ color: '#4b5563' }}>Taxable Value</td>
+                    <td style={{ color: '#4b5563' }}>Taxable Value:</td>
                     <td style={{ textAlign: 'right' }}>{shopSettings.currency}{(invoiceToPrint.subtotal - invoiceToPrint.discount).toFixed(2)}</td>
                   </tr>
                   <tr>
-                    <td style={{ color: '#4b5563' }}>CGST/SGST Tax ({invoiceToPrint.taxRate}%)</td>
+                    <td style={{ color: '#4b5563' }}>CGST/SGST Tax ({invoiceToPrint.taxRate}%):</td>
                     <td style={{ textAlign: 'right' }}>{shopSettings.currency}{invoiceToPrint.taxAmount.toFixed(2)}</td>
                   </tr>
                   <tr className="grand-total">
-                    <td style={{ textTransform: 'uppercase' }}>Grand Total</td>
+                    <td style={{ textTransform: 'uppercase' }}>Grand Total:</td>
                     <td style={{ textAlign: 'right' }}>{shopSettings.currency}{invoiceToPrint.grandTotal.toFixed(2)}</td>
                   </tr>
                 </tbody>
@@ -3274,7 +3323,7 @@ export default function App() {
             </div>
             <div className="print-sig-box">
               For {shopSettings.shopName}
-              <div style={{ marginTop: '24px', fontSize: '10px', color: '#6b7280' }}>(Authorized Signatory)</div>
+              <div style={{ marginTop: '24px', fontSize: '9px', color: '#6b7280' }}>(Authorized Signatory)</div>
             </div>
           </div>
         </div>

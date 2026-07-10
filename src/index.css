@@ -1206,11 +1206,13 @@ table.data-table tr:hover td {
     top: 0;
     width: 100%;
     margin: 0;
-    padding: 10px;
+    padding: 6px;
     font-family: system-ui, -apple-system, sans-serif;
     font-size: 11px;
     color: black !important;
     background-color: white !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
   .print-header {
@@ -1265,34 +1267,17 @@ table.data-table tr:hover td {
   }
 
   .print-table th, .print-table td {
-    border: none;
-    padding: 5px 4px;
-    font-size: 14px;
+    border: 1px solid black !important;
+    padding: 4px 6px !important;
+    font-size: 12px !important;
     color: black !important;
   }
 
   .print-table th {
-    border-top: 1px solid black !important;
-    border-bottom: 1px solid black !important;
-    background-color: transparent !important;
+    background-color: #f1f5f9 !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
     font-weight: 700;
-    text-align: left;
-  }
-
-  .print-table tbody tr:last-child td {
-    border-bottom: 1px solid black !important;
-  }
-
-  .print-table th:first-child, .print-table td:first-child {
-    padding-left: 0 !important;
-    text-align: left !important;
-  }
-
-  .print-table th:last-child, .print-table td:last-child {
-    padding-right: 0 !important;
-    text-align: right !important;
   }
 
   .print-summary-section {
