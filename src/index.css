@@ -461,11 +461,11 @@ button, input, select, textarea {
 }
 
 .kpi-value {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 800;
   line-height: 1.1;
   margin-top: 4px;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
 }
 
 .kpi-label {
@@ -1321,11 +1321,11 @@ table.data-table tr:hover td {
   .print-signatures {
     display: flex;
     justify-content: space-between;
-    margin-top: 40px;
+    margin-top: 24px;
   }
 
   .print-sig-box {
-    width: 180px;
+    width: 240px;
     text-align: center;
     border-top: 1px solid black;
     padding-top: 4px;

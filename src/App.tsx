@@ -1434,7 +1434,7 @@ export default function App() {
               <div className="card kpi-card">
                 <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
                   <span className="kpi-label">Today's Sales</span>
-                  <div className="kpi-value" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{shopSettings.currency}{dashboardStats.todaySales.toFixed(2)}</div>
+                  <div className="kpi-value">{shopSettings.currency}{dashboardStats.todaySales.toFixed(2)}</div>
                   <span style={{ fontSize: '0.75rem', color: 'var(--success)' }}>
                     Active billing day
                   </span>
@@ -2375,7 +2375,7 @@ export default function App() {
               <div className="card kpi-card">
                 <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
                   <span className="kpi-label">Gross Revenue</span>
-                  <div className="kpi-value" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{shopSettings.currency}{reportsStats.totalRevenue.toFixed(2)}</div>
+                  <div className="kpi-value">{shopSettings.currency}{reportsStats.totalRevenue.toFixed(2)}</div>
                   <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Combined billing history</span>
                 </div>
                 <div className="kpi-icon" style={{ backgroundColor: 'var(--primary)', flexShrink: 0 }}>
@@ -2386,7 +2386,7 @@ export default function App() {
               <div className="card kpi-card">
                 <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
                   <span className="kpi-label">Cash Drawer sales</span>
-                  <div className="kpi-value" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{shopSettings.currency}{reportsStats.paymentSplits.Cash.toFixed(2)}</div>
+                  <div className="kpi-value">{shopSettings.currency}{reportsStats.paymentSplits.Cash.toFixed(2)}</div>
                   <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Physical cash collections</span>
                 </div>
                 <div className="kpi-icon" style={{ backgroundColor: 'var(--success)', flexShrink: 0 }}>
@@ -2397,7 +2397,7 @@ export default function App() {
               <div className="card kpi-card">
                 <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
                   <span className="kpi-label">UPI payments</span>
-                  <div className="kpi-value" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{shopSettings.currency}{reportsStats.paymentSplits.UPI.toFixed(2)}</div>
+                  <div className="kpi-value">{shopSettings.currency}{reportsStats.paymentSplits.UPI.toFixed(2)}</div>
                   <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Instant digital transfers</span>
                 </div>
                 <div className="kpi-icon" style={{ backgroundColor: 'hsl(142, 70%, 45%)', flexShrink: 0 }}>
@@ -2408,7 +2408,7 @@ export default function App() {
               <div className="card kpi-card">
                 <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
                   <span className="kpi-label">Card & Credit Sales</span>
-                  <div className="kpi-value" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{shopSettings.currency}{(reportsStats.paymentSplits.Card + reportsStats.paymentSplits.Credit).toFixed(2)}</div>
+                  <div className="kpi-value">{shopSettings.currency}{(reportsStats.paymentSplits.Card + reportsStats.paymentSplits.Credit).toFixed(2)}</div>
                   <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Card swipes & credit logs</span>
                 </div>
                 <div className="kpi-icon" style={{ backgroundColor: 'var(--warning)', flexShrink: 0 }}>
