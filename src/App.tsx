@@ -2009,40 +2009,38 @@ export default function App() {
                     />
                   </div>
 
-                  <div className="input-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
-                    <div className="form-group">
-                      <label>Brand</label>
-                      <select
-                        className="input-field"
-                        value={productForm.brand}
-                        onChange={(e) => setProductForm({ ...productForm, brand: e.target.value })}
-                      >
-                        <option value="Asian Paints">Asian Paints</option>
-                        <option value="Birla Opus">Birla Opus</option>
-                        <option value="Accessories">Accessories</option>
-                      </select>
-                    </div>
+                  <div className="form-group">
+                    <label>Brand</label>
+                    <select
+                      className="input-field"
+                      value={productForm.brand}
+                      onChange={(e) => setProductForm({ ...productForm, brand: e.target.value })}
+                    >
+                      <option value="Asian Paints">Asian Paints</option>
+                      <option value="Birla Opus">Birla Opus</option>
+                      <option value="Accessories">Accessories</option>
+                    </select>
+                  </div>
 
-                    <div className="form-group">
-                      <label>Category</label>
-                      <select
-                        className="input-field"
-                        value={productForm.category}
-                        onChange={(e) => {
-                          const cat = e.target.value;
-                          const nextIsBase = (cat === 'Accessories' || cat === 'Solvents') ? false : productForm.isBase;
-                          const nextBaseType = (cat === 'Accessories' || cat === 'Solvents') ? 'none' : (productForm.basePaintType || (nextIsBase ? 'tintable' : 'ready_mix'));
-                          setProductForm({ ...productForm, category: cat, isBase: nextIsBase, basePaintType: nextBaseType as any });
-                        }}
-                      >
-                        <option value="Interior Paints">Interior Paints</option>
-                        <option value="Exterior Paints">Exterior Paints</option>
-                        <option value="Wood & Metal Paints">Wood & Metal</option>
-                        <option value="Primers">Primers</option>
-                        <option value="Accessories">Brushes & Tools</option>
-                        <option value="Solvents">Thinner & Solvents</option>
-                      </select>
-                    </div>
+                  <div className="form-group">
+                    <label>Category</label>
+                    <select
+                      className="input-field"
+                      value={productForm.category}
+                      onChange={(e) => {
+                        const cat = e.target.value;
+                        const nextIsBase = (cat === 'Accessories' || cat === 'Solvents') ? false : productForm.isBase;
+                        const nextBaseType = (cat === 'Accessories' || cat === 'Solvents') ? 'none' : (productForm.basePaintType || (nextIsBase ? 'tintable' : 'ready_mix'));
+                        setProductForm({ ...productForm, category: cat, isBase: nextIsBase, basePaintType: nextBaseType as any });
+                      }}
+                    >
+                      <option value="Interior Paints">Interior Paints</option>
+                      <option value="Exterior Paints">Exterior Paints</option>
+                      <option value="Wood & Metal Paints">Wood & Metal</option>
+                      <option value="Primers">Primers</option>
+                      <option value="Accessories">Brushes & Tools</option>
+                      <option value="Solvents">Thinner & Solvents</option>
+                    </select>
                   </div>
 
                   <div className="input-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
@@ -2076,54 +2074,52 @@ export default function App() {
 
                   <div className="input-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
                     <div className="form-group">
-                      <label>Stock Qty (K R Nagar)</label>
+                      <label>Stock (Krnr)</label>
                       <input
                         type="number"
                         className="input-field"
                         value={productForm.stockKRNagar === 0 ? '' : productForm.stockKRNagar}
                         min="0"
-                        placeholder="Krnr Stock"
+                        placeholder="Krnr Qty"
                         onChange={(e) => setProductForm({ ...productForm, stockKRNagar: Number(e.target.value) })}
                         required
                       />
                     </div>
 
                     <div className="form-group">
-                      <label>Stock Qty (Bettadapura)</label>
+                      <label>Stock (Bpura)</label>
                       <input
                         type="number"
                         className="input-field"
                         value={productForm.stockBettadapura === 0 ? '' : productForm.stockBettadapura}
                         min="0"
-                        placeholder="Bpura Stock"
+                        placeholder="Bpura Qty"
                         onChange={(e) => setProductForm({ ...productForm, stockBettadapura: Number(e.target.value) })}
                         required
                       />
                     </div>
                   </div>
 
-                  <div className="input-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
-                    <div className="form-group">
-                      <label>Barcode ID (Scan)</label>
-                      <input
-                        type="text"
-                        className="input-field"
-                        placeholder="Click and Scan barcode"
-                        value={productForm.barcode}
-                        onChange={(e) => setProductForm({ ...productForm, barcode: e.target.value })}
-                      />
-                    </div>
+                  <div className="form-group">
+                    <label>Barcode ID (Scan)</label>
+                    <input
+                      type="text"
+                      className="input-field"
+                      placeholder="Click and Scan barcode"
+                      value={productForm.barcode}
+                      onChange={(e) => setProductForm({ ...productForm, barcode: e.target.value })}
+                    />
+                  </div>
 
-                    <div className="form-group">
-                      <label>Min Stock alert</label>
-                      <input
-                        type="number"
-                        className="input-field"
-                        value={productForm.minStock}
-                        min="1"
-                        onChange={(e) => setProductForm({ ...productForm, minStock: Number(e.target.value) })}
-                      />
-                    </div>
+                  <div className="form-group">
+                    <label>Min Stock alert</label>
+                    <input
+                      type="number"
+                      className="input-field"
+                      value={productForm.minStock}
+                      min="1"
+                      onChange={(e) => setProductForm({ ...productForm, minStock: Number(e.target.value) })}
+                    />
                   </div>
 
                   {/* Is Base Paint selection radio buttons */}
