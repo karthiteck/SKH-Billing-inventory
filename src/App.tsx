@@ -1234,7 +1234,7 @@ export default function App() {
               <Paintbrush size={20} />
             </div>
             <div className="brand-details">
-              <div className="brand-name" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{shopSettings.shopName}</div>
+              <div className="brand-name">S K Hardware</div>
               <div className="brand-subtitle">POS V1.0.0</div>
             </div>
           </div>
