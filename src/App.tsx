@@ -707,6 +707,8 @@ export default function App() {
     doc.line(xLeft, 47, xRight, 47);
     doc.line(xLeft, 53, xRight, 53);
     doc.line(85, 41, 85, 59);
+    doc.line(xLeft + 16, 41, xLeft + 16, 59); // Label separator (left)
+    doc.line(103, 41, 103, 59); // Label separator (right)
 
     // Customer Data
     doc.setFont('helvetica', 'bold');
@@ -864,11 +866,26 @@ export default function App() {
     doc.text('Customer Signature', xLeft + 22.5, ySig + 4, { align: 'center' });
 
     // Shop signature line (right)
-    doc.line(xRight - 55, ySig, xRight, ySig);
-    doc.text(`For ${settings.shopName}`, xRight - 27.5, ySig - 5, { align: 'center' });
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(6.5);
-    doc.text('(Authorized Signatory)', xRight - 27.5, ySig + 4, { align: 'center' });
+    doc.line(xRight - 45, ySig, xRight, ySig);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7.5);
+    
+    const shopName = settings.shopName;
+    if (shopName.length > 25) {
+      // Split shop name to prevent overflow
+      const line1 = "For SRI KALABYRAVESHWARA";
+      const line2 = "HARDWARE AND PAINTS";
+      doc.text(line1, xRight - 22.5, ySig + 4, { align: 'center' });
+      doc.text(line2, xRight - 22.5, ySig + 7.5, { align: 'center' });
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(5.5);
+      doc.text('(Authorized Signatory)', xRight - 22.5, ySig + 12, { align: 'center' });
+    } else {
+      doc.text(`For ${shopName}`, xRight - 22.5, ySig + 4, { align: 'center' });
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(6.5);
+      doc.text('(Authorized Signatory)', xRight - 22.5, ySig + 9, { align: 'center' });
+    }
 
     return doc.output('blob');
   };
