@@ -809,17 +809,8 @@ export default function App() {
       yPos += item.tintCode !== 'N/A' ? 9.5 : 6;
     });
 
-    // Draw grid borders around and inside table
+    // Draw horizontal border below the last item row
     doc.line(xLeft, yPos - 1, xRight, yPos - 1);
-    
-    // Draw vertical lines
-    doc.line(xLeft, 69, xLeft, yPos - 1);
-    doc.line(colX.desc, 69, colX.desc, yPos - 1);
-    doc.line(colX.hsn, 69, colX.hsn, yPos - 1);
-    doc.line(colX.qty, 69, colX.qty, yPos - 1);
-    doc.line(colX.price, 69, colX.price, yPos - 1);
-    doc.line(colX.amount, 69, colX.amount, yPos - 1);
-    doc.line(xRight, 69, xRight, yPos - 1);
 
     let yTotalSection = yPos + 4;
     // Check if total section & signatures fit on page, otherwise add a new page
@@ -851,17 +842,17 @@ export default function App() {
       yTotal += 4.5;
     };
 
-    drawTotalRow('Subtotal:', `Rs. ${inv.subtotal.toFixed(2)}`);
+    drawTotalRow('Subtotal', `Rs. ${inv.subtotal.toFixed(2)}`);
     if (inv.discount > 0) {
-      drawTotalRow('Discount:', `-Rs. ${inv.discount.toFixed(2)}`);
+      drawTotalRow('Discount', `-Rs. ${inv.discount.toFixed(2)}`);
     }
-    drawTotalRow('Taxable Value:', `Rs. ${(inv.subtotal - inv.discount).toFixed(2)}`);
-    drawTotalRow(`CGST/SGST Tax (${inv.taxRate}%):`, `Rs. ${inv.taxAmount.toFixed(2)}`);
+    drawTotalRow('Taxable Value', `Rs. ${(inv.subtotal - inv.discount).toFixed(2)}`);
+    drawTotalRow(`CGST/SGST Tax (${inv.taxRate}%)`, `Rs. ${inv.taxAmount.toFixed(2)}`);
     
     doc.line(xRight - 55, yTotal - 2, xRight, yTotal - 2);
     yTotal += 1;
-    drawTotalRow('Grand Total:', `Rs. ${inv.grandTotal.toFixed(2)}`, true);
-    drawTotalRow('Payment Mode:', inv.paymentMethod);
+    drawTotalRow('Grand Total', `Rs. ${inv.grandTotal.toFixed(2)}`, true);
+    drawTotalRow('Payment Mode', inv.paymentMethod);
 
     // Signatures
     const ySig = Math.max(yTotal, yTotalSection + 16) + 12;
@@ -3231,12 +3222,12 @@ export default function App() {
           <table className="print-table">
             <thead>
               <tr>
-                <th style={{ width: '45px', textAlign: 'center', border: '1px solid black' }}>Sl No</th>
-                <th style={{ textAlign: 'left', border: '1px solid black' }}>Item Description</th>
-                <th style={{ width: '60px', textAlign: 'center', border: '1px solid black' }}>HSN</th>
-                <th style={{ width: '55px', textAlign: 'center', border: '1px solid black' }}>Qty</th>
-                <th style={{ width: '85px', textAlign: 'right', border: '1px solid black', paddingRight: '6px' }}>Price</th>
-                <th style={{ width: '95px', textAlign: 'right', border: '1px solid black', paddingRight: '6px' }}>Amount</th>
+                <th style={{ width: '45px', textAlign: 'center' }}>Sl No</th>
+                <th style={{ textAlign: 'left' }}>Item Description</th>
+                <th style={{ width: '60px', textAlign: 'center' }}>HSN</th>
+                <th style={{ width: '55px', textAlign: 'center' }}>Qty</th>
+                <th style={{ width: '85px', textAlign: 'right', paddingRight: '6px' }}>Price</th>
+                <th style={{ width: '95px', textAlign: 'right', paddingRight: '6px' }}>Amount</th>
               </tr>
             </thead>
             <tbody>
@@ -3255,8 +3246,8 @@ export default function App() {
                 return (
                   <React.Fragment key={idx}>
                     <tr>
-                      <td style={{ textAlign: 'center', border: '1px solid black' }}>{idx + 1}</td>
-                      <td style={{ textAlign: 'left', border: '1px solid black' }}>
+                      <td style={{ textAlign: 'center' }}>{idx + 1}</td>
+                      <td style={{ textAlign: 'left' }}>
                         <div style={{ fontWeight: 'bold' }}>{item.name}</div>
                         {item.tintCode !== 'N/A' && (
                           <div style={{ fontSize: '8px', fontStyle: 'italic', marginTop: '2px', color: '#4b5563' }}>
@@ -3264,10 +3255,10 @@ export default function App() {
                           </div>
                         )}
                       </td>
-                      <td style={{ textAlign: 'center', border: '1px solid black' }}>{hsn}</td>
-                      <td style={{ textAlign: 'center', border: '1px solid black' }}>{item.quantity}</td>
-                      <td style={{ textAlign: 'right', border: '1px solid black', paddingRight: '6px' }}>{item.price.toFixed(2)}</td>
-                      <td style={{ textAlign: 'right', border: '1px solid black', paddingRight: '6px' }}>{item.subtotal.toFixed(2)}</td>
+                      <td style={{ textAlign: 'center' }}>{hsn}</td>
+                      <td style={{ textAlign: 'center' }}>{item.quantity}</td>
+                      <td style={{ textAlign: 'right', paddingRight: '6px' }}>{item.price.toFixed(2)}</td>
+                      <td style={{ textAlign: 'right', paddingRight: '6px' }}>{item.subtotal.toFixed(2)}</td>
                     </tr>
                   </React.Fragment>
                 );

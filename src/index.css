@@ -1267,17 +1267,23 @@ table.data-table tr:hover td {
   }
 
   .print-table th, .print-table td {
-    border: 1px solid black !important;
-    padding: 4px 6px !important;
-    font-size: 12px !important;
+    border: none !important;
+    padding: 6px 4px !important;
+    font-size: 13px !important;
     color: black !important;
   }
 
   .print-table th {
-    background-color: #f1f5f9 !important;
+    border-top: 1px solid black !important;
+    border-bottom: 1px solid black !important;
+    background-color: transparent !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
     font-weight: 700;
+  }
+
+  .print-table tbody tr:last-child td {
+    border-bottom: 1px solid black !important;
   }
 
   .print-summary-section {
