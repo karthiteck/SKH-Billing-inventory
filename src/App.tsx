@@ -122,6 +122,7 @@ export default function App() {
   const [catalogSearch, setCatalogSearch] = useState('');
   const [catalogCategory, setCatalogCategory] = useState<string>('All');
   const [catalogBrandFilter, setCatalogBrandFilter] = useState<string>('All');
+  const [catalogLowStockFilter, setCatalogLowStockFilter] = useState<boolean>(false);
   
   // Custom Tinting Dialog State
   const [selectedBaseProduct, setSelectedBaseProduct] = useState<Product | null>(null);
@@ -1443,7 +1444,11 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="card kpi-card">
+              <div 
+                className="card kpi-card" 
+                onClick={() => setCurrentView('reports')}
+                style={{ cursor: 'pointer' }}
+              >
                 <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
                   <span className="kpi-label">Today's Bills</span>
                   <div className="kpi-value">{dashboardStats.todayInvoiceCount}</div>
@@ -1456,7 +1461,14 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="card kpi-card">
+              <div 
+                className="card kpi-card" 
+                onClick={() => {
+                  setCurrentView('inventory');
+                  setCatalogLowStockFilter(true);
+                }}
+                style={{ cursor: 'pointer' }}
+              >
                 <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
                   <span className="kpi-label">Low Stock items</span>
                   <div className="kpi-value">{dashboardStats.lowStockCount}</div>
@@ -2237,6 +2249,16 @@ export default function App() {
                         <option key={cat} value={cat}>{cat}</option>
                       ))}
                     </select>
+
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', userSelect: 'none', marginLeft: '6px', color: catalogLowStockFilter ? 'var(--danger)' : 'inherit' }}>
+                      <input
+                        type="checkbox"
+                        checked={catalogLowStockFilter}
+                        onChange={(e) => setCatalogLowStockFilter(e.target.checked)}
+                        style={{ cursor: 'pointer' }}
+                      />
+                      <span>Low Stock Only</span>
+                    </label>
                   </div>
                 </div>
 
@@ -2257,6 +2279,17 @@ export default function App() {
                       {products
                         .filter((p) => catalogCategory === 'All' || p.category === catalogCategory)
                         .filter((p) => catalogBrandFilter === 'All' || p.brand === catalogBrandFilter)
+                        .filter((p) => {
+                          if (!catalogLowStockFilter) return true;
+                          const activeBranch = currentUser?.role === 'admin' ? warehouseBranchFilter : (currentUser?.branch || 'K R Nagar');
+                          if (activeBranch === 'All') {
+                            return p.stockKRNagar <= p.minStock || p.stockBettadapura <= p.minStock;
+                          } else if (activeBranch === 'K R Nagar') {
+                            return p.stockKRNagar <= p.minStock;
+                          } else {
+                            return p.stockBettadapura <= p.minStock;
+                          }
+                        })
                         .map((prod) => {
                           const activeBranch = currentUser?.role === 'admin' ? warehouseBranchFilter : (currentUser?.branch || 'K R Nagar');
                           const showKRNagar = activeBranch === 'All' || activeBranch === 'K R Nagar';
