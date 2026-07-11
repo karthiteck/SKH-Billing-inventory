@@ -2100,32 +2100,36 @@ export default function App() {
                     </div>
                   </div>
 
-                  <div className="input-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
-                    <div className="form-group">
-                      <label>Stock (Krnr)</label>
-                      <input
-                        type="number"
-                        className="input-field"
-                        value={productForm.stockKRNagar === 0 ? '' : productForm.stockKRNagar}
-                        min="0"
-                        placeholder="Krnr Qty"
-                        onChange={(e) => setProductForm({ ...productForm, stockKRNagar: Number(e.target.value) })}
-                        required
-                      />
-                    </div>
+                  <div className="input-grid" style={{ gridTemplateColumns: currentUser?.role === 'admin' ? '1fr 1fr' : '1fr' }}>
+                    {(currentUser?.role === 'admin' || (currentUser?.branch || 'K R Nagar') === 'K R Nagar') && (
+                      <div className="form-group">
+                        <label>Stock (Krnr)</label>
+                        <input
+                          type="number"
+                          className="input-field"
+                          value={productForm.stockKRNagar === 0 ? '' : productForm.stockKRNagar}
+                          min="0"
+                          placeholder="Krnr Qty"
+                          onChange={(e) => setProductForm({ ...productForm, stockKRNagar: Number(e.target.value) })}
+                          required={currentUser?.role === 'admin' || (currentUser?.branch || 'K R Nagar') === 'K R Nagar'}
+                        />
+                      </div>
+                    )}
 
-                    <div className="form-group">
-                      <label>Stock (Bpura)</label>
-                      <input
-                        type="number"
-                        className="input-field"
-                        value={productForm.stockBettadapura === 0 ? '' : productForm.stockBettadapura}
-                        min="0"
-                        placeholder="Bpura Qty"
-                        onChange={(e) => setProductForm({ ...productForm, stockBettadapura: Number(e.target.value) })}
-                        required
-                      />
-                    </div>
+                    {(currentUser?.role === 'admin' || (currentUser?.branch || 'K R Nagar') === 'Bettadapura') && (
+                      <div className="form-group">
+                        <label>Stock (Bpura)</label>
+                        <input
+                          type="number"
+                          className="input-field"
+                          value={productForm.stockBettadapura === 0 ? '' : productForm.stockBettadapura}
+                          min="0"
+                          placeholder="Bpura Qty"
+                          onChange={(e) => setProductForm({ ...productForm, stockBettadapura: Number(e.target.value) })}
+                          required={currentUser?.role === 'admin' || (currentUser?.branch || 'K R Nagar') === 'Bettadapura'}
+                        />
+                      </div>
+                    )}
                   </div>
 
                   <div className="form-group">

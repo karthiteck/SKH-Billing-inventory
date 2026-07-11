@@ -84,6 +84,22 @@ const KEYS = {
   SESSION: 'skh_billing_session',
 };
 
+// Local write timestamp tracking to prevent background sync race conditions
+let lastLocalWrite = 0;
+let isSyncPulling = false;
+
+export const isWritePending = () => {
+  return Date.now() - lastLocalWrite < 3000; // 3 seconds write lock
+};
+
+const originalSetItem = localStorage.setItem.bind(localStorage);
+localStorage.setItem = (key: string, value: string) => {
+  if (!isSyncPulling && key !== KEYS.SESSION && key !== 'skh_sidebar_collapsed' && key !== 'skh_billing_theme' && key !== 'skh_billing_view') {
+    lastLocalWrite = Date.now();
+  }
+  originalSetItem(key, value);
+};
+
 // Initial Seed Data
 const DEFAULT_SETTINGS: ShopSettings = {
   shopName: 'SRI KALABYRAVESHWARA HARDWARE AND PAINTS',
@@ -554,12 +570,16 @@ export const checkServerSync = async (): Promise<boolean> => {
 };
 
 export const pullCentralDb = async (): Promise<boolean> => {
+  if (isWritePending()) {
+    return false;
+  }
   try {
     const res = await fetch(API_URL);
     if (res.ok) {
       const data = await res.json();
       if (data && typeof data === 'object' && Object.keys(data).length > 0) {
         let updated = false;
+        isSyncPulling = true;
         Object.entries(data).forEach(([key, val]) => {
           if (key === KEYS.SESSION) return; // Do not sync user sessions to the server!
           if (typeof val === 'string') {
@@ -570,6 +590,7 @@ export const pullCentralDb = async (): Promise<boolean> => {
             }
           }
         });
+        isSyncPulling = false;
         return updated;
       } else {
         // Central database is empty! Upload our local storage data to seed the server
@@ -577,6 +598,7 @@ export const pullCentralDb = async (): Promise<boolean> => {
       }
     }
   } catch (e) {
+    isSyncPulling = false;
     // Standalone fallback
   }
   return false;
