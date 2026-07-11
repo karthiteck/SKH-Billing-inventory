@@ -1619,25 +1619,7 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Low inventory alert notification widget */}
-                {dashboardStats.lowStockCount > 0 && (
-                  <div className="card" style={{ borderLeft: '4px solid var(--danger)', padding: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--danger)' }}>
-                      <AlertCircle size={20} />
-                      <h4 style={{ fontWeight: 700, fontSize: '0.9rem' }}>Low Stock Alert</h4>
-                    </div>
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                      {dashboardStats.lowStockCount} products are below their minimum threshold stock levels.
-                    </p>
-                    <button
-                      className="btn btn-danger btn-sm"
-                      style={{ marginTop: '8px', width: '100%' }}
-                      onClick={() => setCurrentView('inventory')}
-                    >
-                      Restock Products
-                    </button>
-                  </div>
-                )}
+
 
               </div>
 
