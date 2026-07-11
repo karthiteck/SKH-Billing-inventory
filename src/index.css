@@ -433,14 +433,14 @@ button, input, select, textarea {
 
 .kpi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 20px;
 }
 
 /* Reports KPI Cards Grid (Auto-wrapping to fit any layout) */
 .reports-kpi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 16px;
 }
 
@@ -448,6 +448,7 @@ button, input, select, textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 18px 20px !important;
 }
 
 .kpi-card-clickable {
@@ -475,8 +476,8 @@ button, input, select, textarea {
 }
 
 .kpi-icon {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
