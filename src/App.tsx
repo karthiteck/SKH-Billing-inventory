@@ -1435,30 +1435,30 @@ export default function App() {
                 title="Open POS Terminal"
                 style={{ border: '1px solid var(--primary-light)' }}
               >
-                <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
+                <div className="kpi-card-header">
                   <span className="kpi-label" style={{ color: 'var(--primary)', fontWeight: 600 }}>Quick Action</span>
-                  <div className="kpi-value" style={{ fontSize: '1.4rem', fontWeight: 800, marginTop: '8px', color: 'var(--text-main)' }}>
+                  <div className="kpi-icon" style={{ backgroundColor: 'var(--primary)', flexShrink: 0 }}>
+                    <ShoppingCart size={20} />
+                  </div>
+                </div>
+                <div className="kpi-card-body">
+                  <div className="kpi-value" style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-main)' }}>
                     Generate Invoice
                   </div>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    Open billing POS terminal
-                  </span>
-                </div>
-                <div className="kpi-icon" style={{ backgroundColor: 'var(--primary)', flexShrink: 0 }}>
-                  <ShoppingCart size={24} />
+                  <span className="kpi-subtext">Open billing POS terminal</span>
                 </div>
               </div>
 
               <div className="card kpi-card">
-                <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
+                <div className="kpi-card-header">
                   <span className="kpi-label">Today's Sales</span>
-                  <div className="kpi-value">{shopSettings.currency}{dashboardStats.todaySales.toFixed(2)}</div>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--success)' }}>
-                    Active billing day
-                  </span>
+                  <div className="kpi-icon" style={{ backgroundColor: 'var(--primary)', flexShrink: 0 }}>
+                    <DollarSign size={20} />
+                  </div>
                 </div>
-                <div className="kpi-icon" style={{ backgroundColor: 'var(--primary)', flexShrink: 0 }}>
-                  <DollarSign size={24} />
+                <div className="kpi-card-body">
+                  <div className="kpi-value">{shopSettings.currency}{dashboardStats.todaySales.toFixed(2)}</div>
+                  <span className="kpi-subtext" style={{ color: 'var(--success)' }}>Active billing day</span>
                 </div>
               </div>
 
@@ -1466,15 +1466,15 @@ export default function App() {
                 className="card kpi-card kpi-card-clickable" 
                 onClick={() => setCurrentView('reports')}
               >
-                <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
+                <div className="kpi-card-header">
                   <span className="kpi-label">Today's Bills</span>
-                  <div className="kpi-value">{dashboardStats.todayInvoiceCount}</div>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    Invoices printed
-                  </span>
+                  <div className="kpi-icon" style={{ backgroundColor: 'var(--success)', flexShrink: 0 }}>
+                    <FileText size={20} />
+                  </div>
                 </div>
-                <div className="kpi-icon" style={{ backgroundColor: 'var(--success)', flexShrink: 0 }}>
-                  <FileText size={24} />
+                <div className="kpi-card-body">
+                  <div className="kpi-value">{dashboardStats.todayInvoiceCount}</div>
+                  <span className="kpi-subtext">Invoices printed</span>
                 </div>
               </div>
 
@@ -1485,15 +1485,17 @@ export default function App() {
                   setCatalogLowStockFilter(true);
                 }}
               >
-                <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
+                <div className="kpi-card-header">
                   <span className="kpi-label">Low Stock items</span>
+                  <div className="kpi-icon" style={{ backgroundColor: dashboardStats.lowStockCount > 0 ? 'var(--danger)' : 'var(--text-muted)', flexShrink: 0 }}>
+                    <Layers size={20} />
+                  </div>
+                </div>
+                <div className="kpi-card-body">
                   <div className="kpi-value">{dashboardStats.lowStockCount}</div>
-                  <span style={{ fontSize: '0.75rem', color: dashboardStats.lowStockCount > 0 ? 'var(--danger)' : 'var(--text-muted)' }}>
+                  <span className="kpi-subtext" style={{ color: dashboardStats.lowStockCount > 0 ? 'var(--danger)' : 'var(--text-muted)' }}>
                     {dashboardStats.lowStockCount > 0 ? 'Action required soon' : 'All stocks optimal'}
                   </span>
-                </div>
-                <div className="kpi-icon" style={{ backgroundColor: dashboardStats.lowStockCount > 0 ? 'var(--danger)' : 'var(--text-muted)', flexShrink: 0 }}>
-                  <Layers size={24} />
                 </div>
               </div>
             </div>
@@ -2393,59 +2395,67 @@ export default function App() {
             {/* Sales Summary Banner */}
             <div className="reports-kpi-grid">
               <div className="card kpi-card">
-                <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
+                <div className="kpi-card-header">
                   <span className="kpi-label">Gross Revenue</span>
+                  <div className="kpi-icon" style={{ backgroundColor: 'var(--primary)', flexShrink: 0 }}>
+                    <TrendingUp size={20} />
+                  </div>
+                </div>
+                <div className="kpi-card-body">
                   <div className="kpi-value">{shopSettings.currency}{reportsStats.totalRevenue.toFixed(2)}</div>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Combined billing history</span>
-                </div>
-                <div className="kpi-icon" style={{ backgroundColor: 'var(--primary)', flexShrink: 0 }}>
-                  <TrendingUp size={24} />
+                  <span className="kpi-subtext">Combined billing history</span>
                 </div>
               </div>
 
               <div className="card kpi-card">
-                <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
+                <div className="kpi-card-header">
                   <span className="kpi-label">Cash Drawer sales</span>
+                  <div className="kpi-icon" style={{ backgroundColor: 'var(--success)', flexShrink: 0 }}>
+                    <DollarSign size={20} />
+                  </div>
+                </div>
+                <div className="kpi-card-body">
                   <div className="kpi-value">{shopSettings.currency}{reportsStats.paymentSplits.Cash.toFixed(2)}</div>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Physical cash collections</span>
-                </div>
-                <div className="kpi-icon" style={{ backgroundColor: 'var(--success)', flexShrink: 0 }}>
-                  <DollarSign size={24} />
+                  <span className="kpi-subtext">Physical cash collections</span>
                 </div>
               </div>
 
               <div className="card kpi-card">
-                <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
+                <div className="kpi-card-header">
                   <span className="kpi-label">UPI payments</span>
+                  <div className="kpi-icon" style={{ backgroundColor: 'hsl(142, 70%, 45%)', flexShrink: 0 }}>
+                    <RefreshCw size={20} />
+                  </div>
+                </div>
+                <div className="kpi-card-body">
                   <div className="kpi-value">{shopSettings.currency}{reportsStats.paymentSplits.UPI.toFixed(2)}</div>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Instant digital transfers</span>
-                </div>
-                <div className="kpi-icon" style={{ backgroundColor: 'hsl(142, 70%, 45%)', flexShrink: 0 }}>
-                  <RefreshCw size={24} />
+                  <span className="kpi-subtext">Instant digital transfers</span>
                 </div>
               </div>
 
               <div className="card kpi-card">
-                <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
+                <div className="kpi-card-header">
                   <span className="kpi-label">Card & Credit Sales</span>
-                  <div className="kpi-value">{shopSettings.currency}{(reportsStats.paymentSplits.Card + reportsStats.paymentSplits.Credit).toFixed(2)}</div>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Card swipes & credit logs</span>
+                  <div className="kpi-icon" style={{ backgroundColor: 'var(--warning)', flexShrink: 0 }}>
+                    <FileText size={20} />
+                  </div>
                 </div>
-                <div className="kpi-icon" style={{ backgroundColor: 'var(--warning)', flexShrink: 0 }}>
-                  <FileText size={24} />
+                <div className="kpi-card-body">
+                  <div className="kpi-value">{shopSettings.currency}{(reportsStats.paymentSplits.Card + reportsStats.paymentSplits.Credit).toFixed(2)}</div>
+                  <span className="kpi-subtext">Card swipes & credit logs</span>
                 </div>
               </div>
 
               <div className="card kpi-card">
-                <div style={{ flex: 1, minWidth: 0, marginRight: '12px' }}>
+                <div className="kpi-card-header">
                   <span className="kpi-label">Total Transactions</span>
-                  <div className="kpi-value">{reportsStats.totalTransactions}</div>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    All-time saved bills
-                  </span>
+                  <div className="kpi-icon" style={{ backgroundColor: 'var(--warning)', flexShrink: 0 }}>
+                    <TrendingUp size={20} />
+                  </div>
                 </div>
-                <div className="kpi-icon" style={{ backgroundColor: 'var(--warning)', flexShrink: 0 }}>
-                  <TrendingUp size={24} />
+                <div className="kpi-card-body">
+                  <div className="kpi-value">{reportsStats.totalTransactions}</div>
+                  <span className="kpi-subtext">All-time saved bills</span>
                 </div>
               </div>
             </div>
