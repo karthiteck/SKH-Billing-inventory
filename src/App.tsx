@@ -2360,18 +2360,20 @@ export default function App() {
                                   <button
                                     className="btn btn-secondary btn-sm"
                                     onClick={() => handleEditProduct(prod)}
-                                    style={{ padding: '6px' }}
+                                    style={{ padding: sidebarCollapsed ? '6px 12px' : '6px', display: 'flex', alignItems: 'center', gap: '4px' }}
                                     title="Edit Product"
                                   >
                                     <Edit2 size={14} />
+                                    {sidebarCollapsed && <span>Edit</span>}
                                   </button>
                                   <button
                                     className="btn btn-danger btn-sm"
                                     onClick={() => handleDeleteProduct(prod.id)}
-                                    style={{ padding: '6px' }}
+                                    style={{ padding: sidebarCollapsed ? '6px 12px' : '6px', display: 'flex', alignItems: 'center', gap: '4px' }}
                                     title="Delete Product"
                                   >
                                     <Trash2 size={14} />
+                                    {sidebarCollapsed && <span>Delete</span>}
                                   </button>
                                 </div>
                               </td>
@@ -2532,9 +2534,10 @@ export default function App() {
                                 className="btn btn-secondary btn-sm"
                                 onClick={() => setViewingInvoice(inv)}
                                 title="View Invoice Details"
-                                style={{ padding: '6px' }}
+                                style={{ padding: sidebarCollapsed ? '6px 12px' : '6px', display: 'flex', alignItems: 'center', gap: '4px' }}
                               >
                                 <Eye size={14} />
+                                {sidebarCollapsed && <span>View</span>}
                               </button>
                               <button
                                 className="btn btn-secondary btn-sm"
@@ -2543,17 +2546,19 @@ export default function App() {
                                   setTimeout(() => window.print(), 300);
                                 }}
                                 title="Reprint Invoice"
-                                style={{ padding: '6px' }}
+                                style={{ padding: sidebarCollapsed ? '6px 12px' : '6px', display: 'flex', alignItems: 'center', gap: '4px' }}
                               >
                                 <Printer size={14} />
+                                {sidebarCollapsed && <span>Reprint</span>}
                               </button>
                               <button
                                 className="btn btn-danger btn-sm"
                                 onClick={() => handleDeleteInvoice(inv.id)}
                                 title="Delete Invoice & Restore Stock"
-                                style={{ padding: '6px' }}
+                                style={{ padding: sidebarCollapsed ? '6px 12px' : '6px', display: 'flex', alignItems: 'center', gap: '4px' }}
                               >
                                 <Trash2 size={14} />
+                                {sidebarCollapsed && <span>Delete</span>}
                               </button>
                             </div>
                           </td>
